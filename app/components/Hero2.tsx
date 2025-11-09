@@ -1,36 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
 
 export default function Hero2() {
   const data = [
     {
-      icon: "/icons/arbol.svg",
+      icon: "/images/arbol.svg",
       value: "12,587",
       label: "Árboles plantados",
     },
     {
-      icon: "/icons/donador.svg",
+      icon: "/images/donador.svg",
       value: "12,587",
       label: "Donadores activos",
     },
     {
-      icon: "/icons/co2.svg",
+      icon: "/images/co2.svg",
       value: "12,587",
       label: "CO₂ compensado",
     },
   ];
 
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-white py-20 px-8 lg:px-20">
+    <section className="w-full flex flex-col items-center justify-center bg-white py-55 px-8 lg:px-20">
       {/* Título principal */}
       <h2 className="text-3xl lg:text-4xl font-extrabold text-black mb-12 text-center">
         El poder de tu ayuda
       </h2>
 
       {/* Contenedor de tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-10 w-full max-w-6xl">
         {data.map((item, index) => (
           <div
             key={index}
