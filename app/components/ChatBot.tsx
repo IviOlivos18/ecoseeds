@@ -4,7 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import ChatMessage from "./ChatMessage";
 
-export default function ChatBot() {
+interface ChatBotProps {
+    onDonacionSuccess?: (tipo: string) => void;
+}
+
+export default function ChatBot({ onDonacionSuccess }: ChatBotProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [showStep2, setShowStep2] = useState(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -14,7 +18,7 @@ export default function ChatBot() {
 
     const options = [
         { id: 1, label: "Tierra", emoji: "🌍" },
-        { id: 2, label: "Herramientas", emoji: "🧰" },
+        { id: 2, label: "Herramienta", emoji: "🧰" },
         { id: 3, label: "Planta", emoji: "🌱" }
     ];
 
@@ -103,11 +107,13 @@ export default function ChatBot() {
             const data = await response.json();
 
             if (response.ok) {
-                alert(`¡Gracias por tu donación de ${selectedOption}!`);
+                // Limpiar todos los datos del formulario
                 setShowStep2(false);
                 setSelectedOption(null);
                 setFormData({ nombre: "", direccion: "", telefono: "" });
                 setErrors({});
+                // Llamar callback para mostrar modal de éxito
+                onDonacionSuccess?.(selectedOption || "");
             } else {
                 setErrors({ submit: data.error });
             }
@@ -115,6 +121,11 @@ export default function ChatBot() {
             console.error('Error al enviar la donación:', error);
             setErrors({ submit: 'Error al procesar la donación. Intenta de nuevo.' });
         }
+    };
+
+    const handleCloseSuccessModal = () => {
+        // Ya se limpian los valores en handleSubmit, solo cerramos el chat si lo deseas
+        setIsOpen(false);
     };
 
     return (
@@ -240,6 +251,7 @@ export default function ChatBot() {
                     </div>
                 </div>
             )}
+
         </>
     );
 }
