@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.find_title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.change-font {
+    font-family: 'Lucida Sans Unicode';
+    font-size: 3.55rem;
+}
